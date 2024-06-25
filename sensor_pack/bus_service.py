@@ -98,6 +98,7 @@ class I2cAdapter(BusAdapter):
 
     def readfrom_into(self, device_addr: int, buf):
         """Читает из устройства на шине с адресом device_addr в буфер buf количество байт, равное длине(len) буфера!"""
+        print(f'Going to read {len(buf)} bytes from device address {hex(device_addr)}')
         return self.bus.readfrom_into(device_addr, buf)
     
     def read_buf_from_mem(self, device_addr: int, mem_addr, buf):
@@ -106,6 +107,8 @@ class I2cAdapter(BusAdapter):
         return self.bus.readfrom_mem_into(device_addr, mem_addr, buf)
 
     def write(self, device_addr: int, buf: bytes):
+        hexified = ' '.join(hex(b) for b in buf)
+        print(f'Going to write {hexified} to device address {hex(device_addr)}')
         return self.bus.writeto(device_addr, buf)
 
     def write_buf_to_mem(self, device_addr: int, mem_addr, buf):
