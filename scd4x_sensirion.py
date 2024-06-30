@@ -240,8 +240,8 @@ class SCD4xSensirion(BaseSensor, Iterator):
     def set_auto_calibration(self, value: bool):
         """Please read '3.7.2 set_automatic_self_calibration_enabled'"""
         cmd = 0x2416
-        value_raw = self._to_bytes(value, 2)
-        self._send_command(cmd, value_raw, 1, 3)
+        value_raw = self._to_bytes(int(value), 2)
+        self._send_command(cmd, value_raw, 1, 0)
 
     def set_measurement(self, start: bool, single_shot: bool = False, rht_only: bool = False):
         """Используется для запуска или остановки периодических измерений.
