@@ -121,7 +121,7 @@ class SCD4xSensirion(BaseSensor, Iterator):
         # создатели датчика 'обрадовали'. вместо подсчета одного байта CRC на 6 байт (3 двухбайтных слова)
         # они считают CRC для каждого из 3-х двухбайтных слов!
         cmd = 0x3682
-        b = self._send_command(cmd, None, 0, bytes_for_read=9,
+        b = self._send_command(cmd, None, 1, bytes_for_read=9,
                                crc_index=range(2, 9, 3), value_index=(range(2), range(3, 5), range(6, 8)))
         # return result
         return tuple([(b[i] << 8) | b[i+1] for i in range(0, 9, 3)])    # Success
